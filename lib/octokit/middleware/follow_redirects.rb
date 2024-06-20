@@ -93,15 +93,15 @@ module Octokit
           env[:request_headers]['Authorization'] = 'dummy'
         end
 
+        ENV_TO_CLEAR.each { |key| env.delete(key) }
+
         if convert_to_get?(response)
           env[:method] = :get
           env[:body] = nil
         else
           env[:body] = request_body
         end
-
-        ENV_TO_CLEAR.each { |key| env.delete(key) }
-
+        
         env
       end
 
